@@ -1,0 +1,19 @@
+{
+  "name": "opentok-helloworld-sample",
+  "version": "0.0.0",
+  "description": "Group video chat app to demonstrate the basic functionality of OpenTok",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^0.8.6",
+    "express": "^3.5.0",
+    "opentok": "^2.3.0"
+  },
+  "devDependencies": {
+    "grunt-express-server": "^0.5.1"
+  }
+}
