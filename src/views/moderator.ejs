@@ -13,7 +13,17 @@
     <script src="/js/openmic.js"></script>
 </head>
 <body>
-    <h2>OpenMic Version1!</h2>
+    <h2>Moderator Page!</h2>
+
+    <div>
+        <div style="float:left">
+            <img src="style/Demo.png"/>
+        </div>
+        <div class="videos">
+            <div id="myCamera" class="publisherContainer"></div>
+            <div id="subscribers" class="subscribersContainer"></div>
+        </div>
+    </div>
     <div id="opentok_console" class="opentok_console">
         <div id="links" class="links">
             <div class="header">Control Panel</div>
@@ -24,22 +34,25 @@
                 <div class="header">Connected Users</div>
                 <div id="onlineusers">
                 </div>
+            </div>
+        </div>
+        <div id="links" class="links">
+            <div id="controlpanel">
                 <div class="header">Pending Calls</div>
                 <div id="acceptCallBox">
                     <!-- Should be initially hidden using CSS -->
-
+.
                 </div>
             </div>
-        </div>
-
-        <div class="videos">
-            <div id="myCamera" class="publisherContainer"></div>
-            <div id="subscribers" class="subscribersContainer"></div>
-
         </div>
     </div>
     <script type="text/javascript" charset="utf-8">
         show('connectLink');
+        document.addEventListener("DOMContentLoaded", function(event) {
+            //do work
+            document.getElementById('txtName').value = 'Moderator';
+            connect();
+        });
     </script>
 </body>
 </html>

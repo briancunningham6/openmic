@@ -37,6 +37,24 @@ app.get('/', function(req, res) {
   });
 });
 
+
+app.get('/moderator', function(req, res) {
+  var sessionId = app.get('sessionId');
+  // generate a fresh token for this client
+  var tokenOptions = {};
+  tokenOptions.role = "moderator";
+
+  // Generate a token.
+  token = opentok.generateToken(sessionId, tokenOptions);
+
+  res.render('moderator.ejs', {
+    apiKey: apiKey,
+    sessionId: sessionId,
+    token: token
+  });
+});
+
+
 // Start the express app
 function init() {
   app.listen(3000, function() {
