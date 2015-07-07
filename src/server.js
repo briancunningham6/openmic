@@ -54,7 +54,7 @@ app.get('/moderator', function(req, res) {
   });
 });
 
-
+//
 // Start the express app
 function init() {
   app.listen(3000, function() {
