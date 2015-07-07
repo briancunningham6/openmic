@@ -144,7 +144,6 @@ function endCall(obj, label) {
     _stream = _streams[obj.id.replace("btn_", "")];
     obj.value = label;
     obj.setAttribute("onclick", "beginCall(this)");
-    removeStream(_stream);
     session.signal({
             type: "endcall",
             to:  _stream.connection,
@@ -158,6 +157,7 @@ function endCall(obj, label) {
             }
         }
     );
+    removeStream(_stream);  //Moved incase of order of operations
 }
 
 function beginCall(obj) {
@@ -200,11 +200,12 @@ function signalEventHandler(event) {
         data = event.data.streamId.toString().split('|');
         _streamId = data[0];
         _name = data[1];
+        console.log(data);
 
         document.getElementById('acceptCallBox').style.display = 'block';
         //document.getElementById('acceptCallLabel').innerHTML = 'Incomming call from ' + _name;
 
-        if(document.getElementById('acceptCallBox').innerHTML.indexOf(_streamId) === -1) {  //Check if the streamId is already in the
+        if(document.getElementById('acceptCallBox').innerHTML.indexOf(_streamId) === -1) {  //Check if the streamId is already in the accept call box
             document.getElementById('acceptCallBox').innerHTML = document.getElementById('acceptCallBox').innerHTML +
             '<div id="callRequest"><div id="acceptCallLabel">Incomming call from ' + _name +
             '</div><input type="button" class="callAcceptButton" value="Accept" stream="' + _streamId + '"/><input type="button" class="callRejectButton" value="Reject" stream="' + _streamId + '"/></div>';
@@ -213,7 +214,8 @@ function signalEventHandler(event) {
 
         //***************************Accept Call*************************************//
         var acceptButtons= document.getElementsByClassName('callAcceptButton');
-        if(acceptButtons.length > 0) {
+
+        if(acceptButtons.length > 0) {                  //This may not do anything. May just remove this if check
             for (var i = 0; i < acceptButtons.length; i++) {
                 acceptButtons[i].addEventListener("click", function () {
 
@@ -241,7 +243,7 @@ function signalEventHandler(event) {
                         }
                     );
 
-                    this.parentElement.remove();
+                    this.parentElement.remove();    //When you click on accept call, you remove this element from the pending calls list
                 });
             }
         }else{
@@ -309,25 +311,18 @@ function signalEventHandler(event) {
 
 
         if (_callaccepted == 'no') {
-            //document.querySelectorAll('[stream$="b27cea04-c05a-4ec5-b183-b63d8c25bae6"]')[0].parentElement.remove();
             alert('Call rejected by ' + _name);
             document.getElementById("btn_" + _streamId).click();
         }
     }
 
     else if (event.type == "signal:endcall") {
-
-        document.querySelectorAll('[stream$="b27cea04-c05a-4ec5-b183-b63d8c25bae6"]')[0].parentElement.remove();
+        console.log("Signal to end call received");
 
         data = event.data.streamId.toString().split("|");
         _streamId = data[0];
 
         removeStream(_streams[_streamId]);
-        _btn = document.getElementById('btn_' + _streamId);
-        _btn.setAttribute("onclick", "beginCall(this)");
-        _btn.value = 'Call ' + data[1];
-
-
 
     }
 
@@ -383,6 +378,7 @@ function addStream(stream) {
     if (stream.connection.connectionId == session.connection.connectionId) {
         return;
     }
+
     var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
     subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
     document.getElementById("subscribers").appendChild(subscriberDiv);
