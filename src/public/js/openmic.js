@@ -289,7 +289,7 @@ function signalEventHandler(event) {
 
 
         if (_callaccepted == 'no') {
-            document.querySelectorAll('[stream$="b27cea04-c05a-4ec5-b183-b63d8c25bae6"]')[0].parentElement.remove();
+            //document.querySelectorAll('[stream$="b27cea04-c05a-4ec5-b183-b63d8c25bae6"]')[0].parentElement.remove();
             alert('Call rejected by ' + _name);
             document.getElementById("btn_" + _streamId).click();
         }
