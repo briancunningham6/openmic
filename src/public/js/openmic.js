@@ -93,9 +93,18 @@ function sessionConnectedHandler(event) {
 }
 
 function streamCreatedHandler(event) {
-
-
-    addButton(event.stream);                         //add call button when a new user comes online
+    // THIS IS AN UGLY HACK
+    // If the user is not a moderator then only include a button if it is to be used to connect to the moderator
+    // Check if this user is a moderator: if forceDisconnect is equal to 0 then they are not
+    if(session.capabilities.forceDisconnect === 0){
+        if(event.stream.name.toString() === 'Moderator'){
+            addButton(event.stream);
+        }
+    }
+    else{
+        //They are a moderator... show all buttons
+        addButton(event.stream);                         //add call button when a new user comes online
+    }
 
 }
 
