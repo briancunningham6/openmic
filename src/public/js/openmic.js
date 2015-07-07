@@ -237,7 +237,8 @@ function signalEventHandler(event) {
                 });
             }
         }else{
-            //Remove pending calls element
+            //Remove pending calls element cause there are no pending calls
+
 
         }
 
