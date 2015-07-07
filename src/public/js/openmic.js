@@ -122,8 +122,16 @@ function addButton( selectedStream) {
 }
 function removeButton(selectedStream) {
 
-    var btn = document.getElementById("btn_" + selectedStream.streamId)
+    var btn = document.getElementById("btn_" + selectedStream.streamId);
     var buttonContainer = document.getElementById("onlineusers");
+
+
+    if(btn.previousSibling.tagName.toLowerCase() === 'br'){ //Check if there are <br> siblings, then remove them
+        buttonContainer.removeChild(btn.previousSibling);   //This avoids accidentally removing other buttons
+    }
+    if(btn.nextSibling.tagName.toLowerCase() === 'br'){
+        buttonContainer.removeChild(btn.nextSibling);
+    }
     delete _streams[selectedStream.streamId];
     if (btn) {
         buttonContainer.removeChild(btn);
