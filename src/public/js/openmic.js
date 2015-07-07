@@ -196,39 +196,49 @@ function signalEventHandler(event) {
         document.getElementById('acceptCallBox').style.display = 'block';
         //document.getElementById('acceptCallLabel').innerHTML = 'Incomming call from ' + _name;
 
-        document.getElementById('acceptCallBox').innerHTML = document.getElementById('acceptCallBox').innerHTML +
-            '<div id="callRequest"><div id="acceptCallLabel">Incomming call from ' + _name + '</div><input type="button" class="callAcceptButton" value="Accept" stream="' + _streamId + '"/><input type="button" class="callRejectButton" value="Reject" stream="' + _streamId + '"/></div>';
+        if(document.getElementById('acceptCallBox').innerHTML.indexOf(_streamId) === -1) {  //Check if the streamId is already in the
+            document.getElementById('acceptCallBox').innerHTML = document.getElementById('acceptCallBox').innerHTML +
+            '<div id="callRequest"><div id="acceptCallLabel">Incomming call from ' + _name +
+            '</div><input type="button" class="callAcceptButton" value="Accept" stream="' + _streamId + '"/><input type="button" class="callRejectButton" value="Reject" stream="' + _streamId + '"/></div>';
+        }
 
 
         //***************************Accept Call*************************************//
         var acceptButtons= document.getElementsByClassName('callAcceptButton');
-        for(var i=0;i<acceptButtons.length;i++) {
-            acceptButtons[i].addEventListener("click", function () {
+        if(acceptButtons.length > 0) {
+            for (var i = 0; i < acceptButtons.length; i++) {
+                acceptButtons[i].addEventListener("click", function () {
 
-                //document.getElementById('acceptCallBox').style.display = 'none';
-                //document.getElementById('acceptCallLabel').innerHTML = '';
-                _streamId = this.attributes.stream.value;
+                    //document.getElementById('acceptCallBox').style.display = 'none';
+                    //document.getElementById('acceptCallLabel').innerHTML = '';
+                    _streamId = this.attributes.stream.value;
 
-                _btn = document.getElementById('btn_' + _streamId);
-                _btn.setAttribute("onclick", "endCall(this,'" + _btn.value + "')");
-                _btn.value = 'End Call';
+                    _btn = document.getElementById('btn_' + _streamId);
+                    _btn.setAttribute("onclick", "endCall(this,'" + _btn.value + "')");
+                    _btn.value = 'End Call';
 
-                addStream(_streams[_streamId]);
-                session.signal({
-                        type: "acceptcall",
-                        to: _streams[_streamId].connection,
-                        data: {callaccepted: _selfstream.streamId + "|" + _selfstream.name + "|yes"}
-                    },
-                    function (error) {
-                        if (error) {
-                            console.log("signal error: " + error.reason);
+                    addStream(_streams[_streamId]);
+                    session.signal({
+                            type: "acceptcall",
+                            to: _streams[_streamId].connection,
+                            data: {callaccepted: _selfstream.streamId + "|" + _selfstream.name + "|yes"}
+                        },
+                        function (error) {
+                            if (error) {
+                                console.log("signal error: " + error.reason);
+                            }
+                            else {
+                                console.log("signal sent");
+                            }
                         }
-                        else {
-                            console.log("signal sent");
-                        }
-                    }
-                );
-            });
+                    );
+
+                    this.parentElement.remove();
+                });
+            }
+        }else{
+            //Remove pending calls element
+
         }
 
         //***************************Accept Call*************************************//
@@ -270,6 +280,7 @@ function signalEventHandler(event) {
         //        );
         //}
         //***************************Reject Call*************************************//
+
         //***************************Call Begin*********************************//
     }
     else if (event.type == "signal:acceptcall") {
