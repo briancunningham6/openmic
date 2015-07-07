@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>OpenMic</title>
-    <script src="//static.opentok.com/webrtc/v2.2/js/TB.min.js"></script>
+    <script src="/js/TB.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome-4.2.0/css/font-awesome.min.css" />
     <script src="/js/openmic.js"></script>
 </head>
 <body>
@@ -31,32 +31,26 @@
                     <hr>
                     <div id="textBox">
                         <input id="txtName" type="text" class="form-control input-md" placeholder="Enter your Name"/>
-                        
-                        <!-- <div class="header">Pending Calls</div>
-                        <div id="acceptCallBox"></div> -->
-
                     </div>
                     <!-- Client Video -->
                     <center>
-                    <div class="Client_video" id="Client_video" style="display: none">
-                        <div id="myCamera" class="publisherContainer"></div>
-                        <div id="subscribers" class="subscribersContainer" style="display:none"></div>
-                    </div>
-                    </center>
+                        <div class="Client_video" id="Client_video" style="display: none">
+                            <div id="myCamera" class="publisherContainer"></div>
+                            <div id="subscribers" class="subscribersContainer" style="display:none"></div>
+                        </div>
                     <!-- End Client Video -->
 
                     <br>
 
                     <!-- Call moderator -->
-                    <center>
                         <div id="onlineusers"></div>
                     <!-- End Call moderator -->
                     
                     <!-- Connection Buttons -->
                         <!-- Connect -->
-                        <button id="connectLink" onclick="connect()" type="button" class="btn btn-primary">Connect</button> 
+                        <button id="connectLink" onclick="connect()" type="button" class="btn btn-primary btn-lg">Connect</button> 
                         <!-- Disconnect -->
-                        <button id="disconnectLink" onclick="disconnect()" style="display: none" type="button" class="btn btn-primary">Disconnect</button>
+                        <button id="disconnectLink" onclick="disconnect()" style="display: none" type="button" class="btn btn-primary btn-lg">Disconnect</button>
                     </center>
                     <!-- End Connection Buttons -->
 

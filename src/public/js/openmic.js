@@ -121,7 +121,7 @@ function addButton( selectedStream) {
         button.setAttribute("value", "Call " + selectedStream.name.toString());
         button.setAttribute("onclick", "beginCall(this)");
         button.setAttribute("style", "display: inline-block");
-        button.setAttribute("class", "btn btn-primary");
+        button.setAttribute("class", "btn btn-primary btn-lg");
         button.innerHTML = "Call" + selectedStream.name.toString();
         buttonContainer.appendChild(document.createElement("br"));
         buttonContainer.appendChild(button);
@@ -160,6 +160,7 @@ function endCall(obj, label) {
     console.log(obj.value);
     _stream = _streams[obj.id.replace("btn_", "")];
     obj.value = label;
+    obj.innerHTML = label;
     obj.setAttribute("onclick", "beginCall(this)");
     session.signal({
             type: "endcall",
@@ -184,6 +185,7 @@ function beginCall(obj) {
 
     obj.setAttribute("onclick", "endCall(this,'" + obj.value + "')");
     obj.value = 'End Call';
+    obj.innerHTML = 'End Call';
     _stream = _streams[obj.id.replace("btn_", "")];
 
 
