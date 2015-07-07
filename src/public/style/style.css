@@ -1,51 +1,50 @@
  
-        .opentok_console {
-           
-            margin-left: 100px;
-            width: 600px;
-           
-        }
-        .links {
-            float: left;
-            width: 200px;
-            border: 1px solid #0042a9;
-            background-color: #FFFFFF;
-        }
-	.videos 
-	{ float:right; width:361px; }
-	.publisherContainer {
-                height:347px;
-                width:361px;
-                float:left;
-                border:1px solid #0042a9;
-				margin-top:2px;
-           
-				background-color:#FFFFFF;
-            }
-      .subscribersContainer {
-                height:347px;
-                width:361px;				
-                border:1px solid #0042a9;
-              
-				background-color:#FFFFFF;
-				margin-top: 415px;
-                
-            }
-        /*#acceptCallBox {*/
-            /*display: none;*/
-            /*z-index: 2;*/
-            /*position: absolute;*/
-            /*top: 100px;*/
-            /*left: 400px;*/
-            /*border: #0042a9 solid 2px;*/
-            /*background-color: pink;*/
-            /*padding: 15px;*/
-        /*}*/
-        #onlineusers {
- min-height: 200px;        }
-        .header {
-            background-color: lightyellow;
-            font-weight:bold;
-             
-        }
+.opentok_console {
+    margin-left: 200px;
+    margin-right: 200px;
+   
+}
+
+.videos { float:right; width:361px; }
+
+.publisherContainer {
+    height:347px;
+    width:361px;
+    float:left;
+    border:1px solid #0042a9;
+	margin-top:2px;
+
+	background-color:#FFFFFF;
+}
+
+.subscribersContainer {
+    height:347px;
+    width:361px;				
+    border:1px solid #0042a9;
+
+    background-color:#FFFFFF;
+    margin-top: 415px;
+        
+}
+
+#onlineusers {
+    min-height: 200px;
+}
+
+.header {
+    background-color: lightyellow;
+    font-weight:bold;
+     
+}
+
+/*#acceptCallBox {
+    display: none;
+    z-index: 2;
+    position: absolute;
+    top: 100px;
+    left: 400px;
+    border: #0042a9 solid 2px;
+    background-color: pink;
+    padding: 15px;
+}*/
 	 

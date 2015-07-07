@@ -4,48 +4,102 @@
     <meta charset="utf-8" />
     <title>OpenMic</title>
     <script src="/js/TB.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         var apiKey = '<%= apiKey %>';
         var sessionId = '<%= sessionId %>';
         var token = '<%= token %>';
     </script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/menu_topside.css" />
     <link rel="stylesheet" type="text/css" href="style/style.css" />
     <script src="/js/openmic.js"></script>
 </head>
 <body>
-    <h2>Moderator Page!</h2>
+    <div class="container">
+        <div class="menu-wrap">
+            <nav class="menu-top">
+                <div class="profile"><span>Matthew Greenberg</span></div>
+                <div class="icon-list">
+                    <a href="#"><i class="fa fa-fw fa-star-o"></i></a>
+                    <a href="#"><i class="fa fa-fw fa-bell-o"></i></a>
+                    <a href="#"><i class="fa fa-fw fa-envelope-o"></i></a>
+                    <a href="#"><i class="fa fa-fw fa-comment-o"></i></a>
+                </div>
+            </nav>
+            <nav class="menu-side">
+                <a href="#">Recent Stories</a>
+                <a href="#">Reading List</a>
+                <a href="#">My Stories</a>
+                <a href="#">Categories</a>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Launch QR Code
+                </button>
+            </nav>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h3 class="modal-title" id="myModalLabel">QR Code for the Open MIC  <i class="fa fa-bullhorn"></i></h3></center>
+                  </div>
+                  <div class="modal-body">
+                    <center><img src="style/Demo.png"/></center>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Modal -->
+        </div><!--menu-wrap-->
 
-    <div>
-        <div style="float:left">
-            <img src="style/Demo.png"/>
-        </div>
-        <div class="videos">
-            <div id="myCamera" class="publisherContainer"></div>
-            <div id="subscribers" class="subscribersContainer"></div>
-        </div>
-    </div>
-    <div id="opentok_console" class="opentok_console">
-        <div id="links" class="links">
-            <div class="header">Control Panel</div>
-            <div id="controlpanel">
-                <input id="txtName" type="text" />
-                <input type="button" value="Connect" id="connectLink" onclick="javascript:connect()" />
-                <input type="button" value="Leave" id="disconnectLink" onclick="javascript:disconnect()" style="display: none" />
-                <div class="header">Connected Users</div>
-                <div id="onlineusers">
+        <button class="menu-button" id="open-button">Open Menu</button>
+        <div class="content-wrap">
+            <div class="content">
+                <div class="videos">
+                    <div id="myCamera" class="publisherContainer"></div>
+                    <div id="subscribers" class="subscribersContainer"></div>
+                </div>
+                
+                <div id="opentok_console" class="opentok_console">
+                    <div id="links" class="links">
+                        <div class="header">Control Panel</div>
+                        <div id="controlpanel">
+                            <input id="txtName" type="text" />
+                            <input type="button" value="Connect" id="connectLink" onclick="javascript:connect()" />
+                            <input type="button" value="Leave" id="disconnectLink" onclick="javascript:disconnect()" style="display: none" />
+                            <div class="header">Connected Users</div>
+                            <div id="onlineusers">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="links" class="links">
+                        <div id="controlpanel">
+                            <div class="header">Pending Calls</div>
+                            <div id="acceptCallBox">
+                                <!-- Should be initially hidden using CSS -->
+            .
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="links" class="links">
-            <div id="controlpanel">
-                <div class="header">Pending Calls</div>
-                <div id="acceptCallBox">
-                    <!-- Should be initially hidden using CSS -->
-.
-                </div>
-            </div>
-        </div>
-    </div>
+        </div><!-- /content-wrap -->
+
+    </div><!-- /container -->
+
+    
+
+    <script src="js/classie.js"></script>
+    <script src="js/main.js"></script>
+
     <script type="text/javascript" charset="utf-8">
         show('connectLink');
         document.addEventListener("DOMContentLoaded", function(event) {

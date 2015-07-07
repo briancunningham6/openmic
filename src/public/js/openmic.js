@@ -48,8 +48,10 @@ function connect() {
 function disconnect() {
     stopPublishing();
     session.disconnect() ;
-
+    show('connectLink');
     hide('disconnectLink');
+    hide('Client_video');
+    show('textBox');
 
 }
 
@@ -86,6 +88,8 @@ function sessionConnectedHandler(event) {
     startPublishing();
     show('disconnectLink');
     hide('connectLink');
+    show('Client_video');
+    hide('textBox');
 }
 
 function streamCreatedHandler(event) {
@@ -100,13 +104,17 @@ function addButton( selectedStream) {
 
     if (! document.getElementById("btn_" + selectedStream.streamId))
     {
-        var button = document.createElement("input");
+        var button = document.createElement("button");
         var buttonContainer= document.getElementById("onlineusers");
 
         button.setAttribute("id", "btn_" + selectedStream.streamId);
         button.setAttribute("type", "button");
         button.setAttribute("value", "Call " + selectedStream.name.toString());
         button.setAttribute("onclick", "beginCall(this)");
+        button.setAttribute("style", "display: inline-block");
+        button.setAttribute("class", "btn btn-primary");
+        button.innerHTML = "Call" + selectedStream.name.toString();
+        buttonContainer.appendChild(document.createElement("br"));
         buttonContainer.appendChild(button);
         buttonContainer.appendChild(document.createElement("br"));
         _streams[selectedStream.streamId] = selectedStream;
@@ -281,7 +289,7 @@ function signalEventHandler(event) {
         //        );
         //}
         //***************************Reject Call*************************************//
-
+        
         //***************************Call Begin*********************************//
     }
     else if (event.type == "signal:acceptcall") {
@@ -388,7 +396,7 @@ function removeStream(stream)
     session.unsubscribe(subscribers[stream.streamId]);
 }
 function show(id) {
-    document.getElementById(id).style.display = 'block';
+    document.getElementById(id).style.display = 'inline-block';
 }
 
 function hide(id) {

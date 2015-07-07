@@ -4,40 +4,70 @@
     <meta charset="utf-8" />
     <title>OpenMic</title>
     <script src="//static.opentok.com/webrtc/v2.2/js/TB.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         var apiKey = '<%= apiKey %>';
         var sessionId = '<%= sessionId %>';
         var token = '<%= token %>';
     </script>
     <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
     <script src="/js/openmic.js"></script>
 </head>
 <body>
-    <h2>OpenMic Version1!</h2>
-    <div id="opentok_console" class="opentok_console">
-        <div id="links" class="links">
-            <div class="header">Control Panel</div>
-            <div id="controlpanel">
-                <input id="txtName" type="text" />
-                <input type="button" value="Connect" id="connectLink" onclick="javascript:connect()" />
-                <input type="button" value="Leave" id="disconnectLink" onclick="javascript:disconnect()" style="display: none" />
-                <div class="header">Connected Users</div>
-                <div id="onlineusers">
-                </div>
-                <div class="header">Pending Calls</div>
-                <div id="acceptCallBox">
-                    <!-- Should be initially hidden using CSS -->
+    <!-- container -->
+    <div class="container">
+        <header class="codrops-header">
+            <h1>OpenMic <i class="fa fa-bullhorn"></i><span>Some fancy add line for openMic Yeehaaww!!!</span></h1>
+        </header>
+        <!-- Row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="opentok_console" class="opentok_console">
+                    <hr>
+                    <div id="textBox">
+                        <input id="txtName" type="text" class="form-control input-md" placeholder="Enter your Name"/>
+                        
+                        <!-- <div class="header">Pending Calls</div>
+                        <div id="acceptCallBox"></div> -->
+
+                    </div>
+                    <!-- Client Video -->
+                    <center>
+                    <div class="Client_video" id="Client_video" style="display: none">
+                        <div id="myCamera" class="publisherContainer"></div>
+                        <div id="subscribers" class="subscribersContainer" style="display:none"></div>
+                    </div>
+                    </center>
+                    <!-- End Client Video -->
+
+                    <br>
+
+                    <!-- Call moderator -->
+                    <center>
+                        <div id="onlineusers"></div>
+                    <!-- End Call moderator -->
+                    
+                    <!-- Connection Buttons -->
+                        <!-- Connect -->
+                        <button id="connectLink" onclick="connect()" type="button" class="btn btn-primary">Connect</button> 
+                        <!-- Disconnect -->
+                        <button id="disconnectLink" onclick="disconnect()" style="display: none" type="button" class="btn btn-primary">Disconnect</button>
+                    </center>
+                    <!-- End Connection Buttons -->
 
                 </div>
+                <!-- End Class opentok_console -->
             </div>
         </div>
-
-        <div class="videos">
-            <div id="myCamera" class="publisherContainer"></div>
-            <div id="subscribers" class="subscribersContainer"></div>
-
-        </div>
+        <!-- End Row -->
     </div>
+    <!-- End Container -->
+
     <script type="text/javascript" charset="utf-8">
         show('connectLink');
     </script>
