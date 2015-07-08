@@ -236,7 +236,7 @@ function addButton( selectedStream) {
         button.setAttribute("onclick", "beginCall(this)");
         button.setAttribute("style", "display: inline-block");
         button.setAttribute("class", "btn btn-primary btn-lg col-md-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12");
-        button.innerHTML = "Call" + selectedStream.name.toString();
+        button.innerHTML = "Request to ask a question to the " + selectedStream.name.toString();
         buttonContainer.appendChild(document.createElement("br"));
         buttonContainer.appendChild(button);
         buttonContainer.appendChild(document.createElement("br"));
@@ -298,7 +298,7 @@ function beginCall(obj) {
 
     obj.setAttribute("onclick", "endCall(this,'" + obj.value + "')");
     obj.value = 'End Call';
-    obj.innerHTML = 'End Call';
+    obj.innerHTML = 'Waiting for moderator to respond (click to cancel)  <i class="fa fa-spinner fa-pulse"></i>';
     _stream = _streams[obj.id.replace("btn_", "")];
 
 
@@ -326,7 +326,6 @@ function signalEventHandler(event) {
 
 
     if (event.type == "signal:begincall") {
-
 
         //***************************Call Begin*********************************//
 
@@ -444,6 +443,10 @@ function signalEventHandler(event) {
         if (_callaccepted == 'yes') {
 
             addStream(_streams[_streamId]);
+
+            _btn = document.getElementById('btn_' + _streamId);
+            _btn.innerHTML = 'You are live! Ask your question (Click to end call)';
+            _btn.innerHTML = 'You are live! Ask your question (Click to end call)';
         }
 
 
@@ -471,8 +474,8 @@ function signalEventHandler(event) {
 
 
         button.setAttribute("onclick", "beginCall(this)");
-        button.setAttribute("value", "Call " + _name);
-        button.innerHTML = "Call " + _name;
+        button.setAttribute("value", "Request to ask a question to the " + _name);
+        button.innerHTML = "Request to ask a question to the " + _name;
 
         console.log(button);
 
