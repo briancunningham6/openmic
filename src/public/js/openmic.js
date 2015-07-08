@@ -226,8 +226,8 @@ function signalEventHandler(event) {
 
         if(document.getElementById('acceptCallBox').innerHTML.indexOf(_streamId) === -1) {  //Check if the streamId is already in the accept call box
             document.getElementById('acceptCallBox').innerHTML = document.getElementById('acceptCallBox').innerHTML +
-            '<div id="callRequest"><div id="acceptCallLabel">Incomming call from ' + _name +
-            '</div><input type="button" class="callAcceptButton" value="Accept" stream="' + _streamId + '"/><input type="button" class="callRejectButton" value="Reject" stream="' + _streamId + '"/></div>';
+                '<div id="callRequest"><div id="acceptCallLabel">Incomming call from ' + _name +
+                '</div><input type="button" class="callAcceptButton" value="Accept" stream="' + _streamId + '"/><input type="button" class="callRejectButton" value="Reject" stream="' + _streamId + '"/></div>';
         }
 
 
@@ -244,7 +244,8 @@ function signalEventHandler(event) {
 
                     _btn = document.getElementById('btn_' + _streamId);
                     _btn.setAttribute("onclick", "endCall(this,'" + _btn.value + "')");
-                    _btn.value = 'End Call';
+                    _btn.value = 'End Call with ' + _name;
+                    _btn.innerHTML = 'End Call with ' + _name;
 
                     addStream(_streams[_streamId]);
                     session.signal({
@@ -317,7 +318,9 @@ function signalEventHandler(event) {
 
         //Trun the background of the video to green
         var backgroundOfVideo = document.querySelector('.Client_video');
-        backgroundOfVideo.style.backgroundColor = 'green';
+        if(backgroundOfVideo) {
+            backgroundOfVideo.style.backgroundColor = 'green';
+        }
 
         data = event.data.callaccepted.toString().split('|');
         _streamId = data[0];
@@ -342,13 +345,43 @@ function signalEventHandler(event) {
     else if (event.type == "signal:endcall") {
         console.log("Signal to end call received");
 
+
         data = event.data.streamId.toString().split("|");
         _streamId = data[0];
+        _name = data[1];
 
+        console.log(_streamId);
+
+        var button = document.getElementById("btn_" + _streamId);
+
+
+
+        button.setAttribute("onclick", "beginCall(this)");
+        button.setAttribute("value", "Call " + _name);
+        button.innerHTML = "Call " + _name;
+
+        console.log(button);
+
+        var callBox = document.getElementById('acceptCallBox');
+
+        if (callBox !== undefined && callBox !== null) {
+            var children = callBox.children;
+
+            if (children.length > 0) {
+                if (callBox.innerHTML.indexOf(_streamId) !== -1) {  //Check if the streamId is already in the accept call box. If it is then the call hasn't been accepted or rejected
+                    for (var i = 0; i < children.length; i++) {
+                        if (children[i].innerHTML.indexOf(_streamId) !== -1) {
+                            callBox.removeChild(children[i]);
+                        }
+                    }
+                    //document.getElementById('acceptCallBox').innerHTML = document.getElementById('acceptCallBox').innerHTML +
+                    //'<div id="callRequest"><div id="acceptCallLabel">Incomming call from ' + _name +
+                    //'</div><input type="button" class="callAcceptButton" value="Accept" stream="' + _streamId + '"/><input type="button" class="callRejectButton" value="Reject" stream="' + _streamId + '"/></div>';
+                }
+            }
+        }
         removeStream(_streams[_streamId]);
-
     }
-
 }
 
 function streamDestroyedHandler(event) {
@@ -414,7 +447,9 @@ function removeStream(stream)
 {
     //Remove the border around  the background of the video
     var backgroundOfVideo = document.querySelector('.Client_video');
-    backgroundOfVideo.style.backgroundColor = '#b4bad2';
+    if(backgroundOfVideo){
+        backgroundOfVideo.style.backgroundColor = '#b4bad2';
+    }
 
     session.unsubscribe(subscribers[stream.streamId]);
 }
