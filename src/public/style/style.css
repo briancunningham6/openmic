@@ -51,3 +51,8 @@
 .modal-dialog{
     width:45% !important;
 }
+
+.Client_video{
+    background-color: red;
+    padding: 10px;
+}

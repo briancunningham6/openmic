@@ -180,7 +180,6 @@ function endCall(obj, label) {
 
 function beginCall(obj) {
 
-
     console.log(obj.value);
 
     obj.setAttribute("onclick", "endCall(this,'" + obj.value + "')");
@@ -213,6 +212,7 @@ function signalEventHandler(event) {
 
 
     if (event.type == "signal:begincall") {
+
 
         //***************************Call Begin*********************************//
 
@@ -310,10 +310,14 @@ function signalEventHandler(event) {
         //        );
         //}
         //***************************Reject Call*************************************//
-        
+
         //***************************Call Begin*********************************//
     }
     else if (event.type == "signal:acceptcall") {
+
+        //Trun the background of the video to green
+        var backgroundOfVideo = document.querySelector('.Client_video');
+        backgroundOfVideo.style.backgroundColor = 'green';
 
         data = event.data.callaccepted.toString().split('|');
         _streamId = data[0];
@@ -408,6 +412,10 @@ function addStream(stream) {
 
 function removeStream(stream)
 {
+    //Remove the border around  the background of the video
+    var backgroundOfVideo = document.querySelector('.Client_video');
+    backgroundOfVideo.style.backgroundColor = '#b4bad2';
+
     session.unsubscribe(subscribers[stream.streamId]);
 }
 function show(id) {
