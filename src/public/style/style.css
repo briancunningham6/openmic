@@ -1,13 +1,13 @@
- 
+
 .opentok_console {
     margin-left: 200px;
     margin-right: 200px;
-   
+
 }
 
-/*.videos { float:right; width:361px; }*/
+.videos { float:right; width:361px; }
 
-/*.publisherContainer {
+.publisherContainer {
     height:347px;
     width:361px;
     float:left;
@@ -19,12 +19,12 @@
 
 .subscribersContainer {
     height:347px;
-    width:361px;				
+    width:361px;
     border:1px solid #0042a9;
 
     background-color:#FFFFFF;
     margin-top: 415px;
-        
+
 }*/
 
 #onlineusers {
@@ -34,7 +34,7 @@
 .header {
     background-color: lightyellow;
     font-weight:bold;
-     
+
 }
 
 /*#acceptCallBox {
@@ -47,4 +47,7 @@
     background-color: pink;
     padding: 15px;
 }*/
-	 
+
+.modal-dialog{
+    width:45% !important;
+}
