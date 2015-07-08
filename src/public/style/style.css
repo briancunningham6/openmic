@@ -60,3 +60,7 @@
 strong > h4 > b {
     color: #FFFFFF;
 }
+
+.panel-title {
+    color: #9F9696 !important;
+}

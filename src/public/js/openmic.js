@@ -339,8 +339,8 @@ function signalEventHandler(event) {
 
         if(document.getElementById('acceptCallBox').innerHTML.indexOf(_streamId) === -1) {  //Check if the streamId is already in the accept call box
             document.getElementById('acceptCallBox').innerHTML = document.getElementById('acceptCallBox').innerHTML +
-                '<div id="callRequest"><div id="acceptCallLabel">Incomming call from ' + _name +
-                '</div><input type="button" class="callAcceptButton" value="Accept" stream="' + _streamId + '"/><input type="button" class="callRejectButton" value="Reject" stream="' + _streamId + '"/></div>';
+                '<div id="callRequest"><div id="acceptCallLabel"><b><h2>Incomming call from ' + _name +
+                '</h2></b></div><br><input type="button" class="callAcceptButton btn btn-primary btn-sm" value="Accept" stream="' + _streamId + '"/>&nbsp<input type="button" class="callRejectButton btn btn-primary btn-sm" value="Reject" stream="' + _streamId + '"/></div>';
         }
 
 
@@ -581,7 +581,7 @@ function removeStream(stream)
     //Remove the border around  the background of the video
     var backgroundOfVideo = document.querySelector('.Client_video');
     if(backgroundOfVideo){
-        backgroundOfVideo.style.backgroundColor = 'red';
+        backgroundOfVideo.style.backgroundColor = '#AB0707';
     }
 
     session.unsubscribe(subscribers[stream.streamId]);
