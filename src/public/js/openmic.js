@@ -127,7 +127,7 @@ function postQuestion(obj){
 
             document.getElementById("chathistory").innerHTML += '<br><strong>' + _userName + ': </strong>' + chatBox.value;
             chatBox.value = '';
-            
+
         }else {
 
             var userList = document.getElementById("onlineusers");
@@ -213,8 +213,10 @@ function streamCreatedHandler(event) {
         }
     }
     else{
-        //They are a moderator... show all buttons
-        addButton(event.stream);                         //add call button when a new user comes online
+        //They are a moderator... show all buttons except the moderator button
+        if(event.stream.name.toString() !== 'Moderator') {
+            addButton(event.stream);                         //add call button when a new user comes online
+        }
     }
 
 }
