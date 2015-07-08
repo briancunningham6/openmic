@@ -298,7 +298,7 @@ function beginCall(obj) {
 
     obj.setAttribute("onclick", "endCall(this,'" + obj.value + "')");
     obj.value = 'End Call';
-    obj.innerHTML = 'Waiting for moderator to respond (click to cancel)  <i class="fa fa-spinner fa-pulse"></i>';
+    obj.innerHTML = 'Waiting for moderator to respond (click to cancel)  <i class="fa fa-spinner fa-spin"></i>';
     _stream = _streams[obj.id.replace("btn_", "")];
 
 
