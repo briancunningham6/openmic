@@ -53,6 +53,10 @@
 }
 
 .Client_video{
-    background-color: red;
+    background-color: #AB0707;
     padding: 10px;
+}
+
+strong > h4 > b {
+    color: #FFFFFF;
 }

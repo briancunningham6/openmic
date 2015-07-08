@@ -22,7 +22,7 @@ body,
 }
 
 .content-wrap {
-	background: #b4bad2;
+	background: #D9DCE8;
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 	-webkit-transition: -webkit-transform 0.3s;
@@ -31,7 +31,7 @@ body,
 
 .content {
 	position: relative;
-	background: #b4bad2;
+	background: #D9DCE8;
 }
 
 /* Overlay */

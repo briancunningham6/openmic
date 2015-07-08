@@ -68,12 +68,13 @@ function setupChat(){
     chatButton.innerHTML = "Post question";
     chatButton.setAttribute("id", _chatID);
     chatButton.setAttribute("onClick", "postQuestion(this)");
-    chatButton.setAttribute("class", "chatButton");
+    chatButton.setAttribute("class", "chatButton btn btn-primary btn-sm");
 
     var chatBox = document.createElement("textarea");
     chatBox.setAttribute("placeholder", "Type in a message");
     chatBox.setAttribute("id", "chatbox");
-    chatBox.setAttribute("class", "chatBox");
+    chatBox.setAttribute("class", "chatBox form-control");
+    chatBox.setAttribute("style", "width: 272px; height: 54px");
     chatBox.addEventListener("keypress", function(e){
         if (e.keyCode == 13){
             postQuestion(chatBox);
@@ -84,7 +85,7 @@ function setupChat(){
     var chatHistory = document.createElement("div");
     chatHistory.setAttribute("id", "chathistory");
     chatHistory.setAttribute("class", "chatHistory");
-    chatHistory.innerHTML = "<strong>Welcome " + _userName + "!</strong>";
+    chatHistory.innerHTML = "<strong><h4><b>Welcome " + _userName + "!</b></h4></strong>";
 
     document.getElementById("chatContainer").appendChild(chatHistory);  //Add the above created elements to the chatContainer element in the html pages
     document.getElementById("chatContainer").appendChild(chatBox);
