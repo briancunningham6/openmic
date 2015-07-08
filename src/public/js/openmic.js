@@ -59,6 +59,7 @@ function disconnect() {
 }
 
 function setupChat(){
+    hide("chatContainer");
     _userName = document.getElementById("txtName").value;
 
     var chatButton = document.createElement("button");
@@ -81,7 +82,7 @@ function setupChat(){
     var chatHistory = document.createElement("div");
     chatHistory.setAttribute("id", "chathistory");
     chatHistory.setAttribute("class", "chatHistory");
-    chatHistory.innerHTML = "Welcome " + _userName + "!";
+    chatHistory.innerHTML = "<strong>Welcome " + _userName + "!</strong>";
 
     document.getElementById("chatContainer").appendChild(chatHistory);  //Add the above created elements to the chatContainer element in the html pages
     document.getElementById("chatContainer").appendChild(chatBox);
@@ -122,7 +123,7 @@ function postQuestion(obj){
                 }
             }
 
-            document.getElementById("chathistory").innerHTML += '<br>' + _userName + ': ' + chatBox.value;
+            document.getElementById("chathistory").innerHTML += '<br><strong>' + _userName + ': </strong>' + chatBox.value;
             chatBox.value = '';
             
         }else {
@@ -156,7 +157,7 @@ function postQuestion(obj){
                 }
             );
 
-            document.getElementById("chathistory").innerHTML += '<br>' + _userName + ': ' + chatBox.value;
+            document.getElementById("chathistory").innerHTML += '<br><strong>' + _userName + ': </strong>' + chatBox.value;
             chatBox.value = '';
         }
     }
@@ -177,6 +178,7 @@ function startPublishing() {
             _selfstream = event.stream;
         });
 
+        show("chatContainer");
     }
 }
 
@@ -502,7 +504,7 @@ function signalEventHandler(event) {
         _name = data[1];
         var message = data[2];
 
-        document.getElementById("chathistory").innerHTML += '<br>' + _name + ': ' +message;
+        document.getElementById("chathistory").innerHTML += '<br><strong>' + _name + ': </strong>' +message;
 
     }
 }
