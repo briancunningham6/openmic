@@ -20,12 +20,14 @@ var _selfstream;
 var  subscribers = new Array();
 var _streams = new Array();
 var _connections = new Array();
+var _userName;
+var _chatID = '_' + Math.floor((Math.random() * 2135486430));
 
 function connect() {
     OT.on("exception", exceptionHandler);
 
     // Un-comment the following to set automatic logging:
-    OT.setLogLevel(OT.DEBUG);
+    //OT.setLogLevel(OT.DEBUG);
 
     if (!(OT.checkSystemRequirements())) {
         alert("You don't have the minimum requirements to run this application.");
@@ -42,6 +44,7 @@ function connect() {
         session.on('streamDestroyed', streamDestroyedHandler);
         session.on("signal", signalEventHandler);
 
+        setupChat();
     }
 }
 
@@ -53,6 +56,110 @@ function disconnect() {
     hide('Client_video');
     show('textBox');
 
+}
+
+function setupChat(){
+    _userName = document.getElementById("txtName").value;
+
+    var chatButton = document.createElement("button");
+    chatButton.innerHTML = "Post question";
+    chatButton.setAttribute("id", _chatID);
+    chatButton.setAttribute("onClick", "postQuestion(this)");
+    chatButton.setAttribute("class", "chatButton");
+
+    var chatBox = document.createElement("textarea");
+    chatBox.setAttribute("placeholder", "Type in a message");
+    chatBox.setAttribute("id", "chatbox");
+    chatBox.setAttribute("class", "chatBox");
+    chatBox.addEventListener("keypress", function(e){
+        if (e.keyCode == 13){
+            postQuestion(chatBox);
+        }
+    });
+
+
+    var chatHistory = document.createElement("div");
+    chatHistory.setAttribute("id", "chathistory");
+    chatHistory.setAttribute("class", "chatHistory");
+    chatHistory.innerHTML = "Welcome " + _userName + "!";
+
+    document.getElementById("chatContainer").appendChild(chatHistory);  //Add the above created elements to the chatContainer element in the html pages
+    document.getElementById("chatContainer").appendChild(chatBox);
+    document.getElementById("chatContainer").appendChild(chatButton);
+}
+
+function postQuestion(obj){
+    var chatBox = document.getElementById("chatbox");
+
+    if(chatBox.value !== ''){
+
+        if(_userName === 'Moderator'){
+            var userList = document.getElementById("onlineusers");
+            var targetUser = '';
+
+            for (var i = 0; i < userList.children.length; i++) {
+                if (userList.children[i].nodeName === "BUTTON") {
+                    targetUser = userList.children[i].getAttribute("id");
+                    targetUser = (targetUser.replace("btn_", ""));
+
+
+                    var streamTarget = _streams[targetUser];
+
+                    session.signal({
+                            type: "chat",
+                            to: streamTarget.connection,
+                            data: {streamId: _selfstream.streamId + "|" + _selfstream.name + "|" + chatBox.value + "|" + _userName}
+                        },
+                        function (error) {
+                            if (error) {
+                                console.log("signal error: " + error.reason);
+                            } else {
+                                console.log("signal sent");
+                            }
+                        }
+                    );
+
+                }
+            }
+
+            document.getElementById("chathistory").innerHTML += '<br>' + _userName + ': ' + chatBox.value;
+            chatBox.value = '';
+            
+        }else {
+
+            var userList = document.getElementById("onlineusers");
+            var moderator;
+            for (var i = 0; i < userList.children.length; i++) {
+                if (userList.children[i].nodeName === "BUTTON") {
+                    moderator = userList.children[i].getAttribute("id");
+                    moderator = (moderator.replace("btn_", ""));
+                    break;
+                }
+            }
+
+            var streamTarget = _streams[moderator]; //Send question to moderator only
+
+            console.log("Stream target");
+            console.log(streamTarget);
+
+            session.signal({
+                    type: "chat",
+                    to: streamTarget.connection,
+                    data: {streamId: _selfstream.streamId + "|" + _selfstream.name + "|" + chatBox.value + "|" + _userName}
+                },
+                function (error) {
+                    if (error) {
+                        console.log("signal error: " + error.reason);
+                    } else {
+                        console.log("signal sent");
+                    }
+                }
+            );
+
+            document.getElementById("chathistory").innerHTML += '<br>' + _userName + ': ' + chatBox.value;
+            chatBox.value = '';
+        }
+    }
 }
 
 // Called when user wants to start publishing to the session
@@ -381,6 +488,22 @@ function signalEventHandler(event) {
             }
         }
         removeStream(_streams[_streamId]);
+    }
+
+    else if (event.type == "signal:chat") {
+        //data: { streamId: _selfstream.streamId+"|"+_selfstream.name+"|"+ chatBox.value+"|"+_userName}
+
+        //document.getElementById("chathistory").innerHTML += '<br>' + _userName + ': ' +chatBox.value;
+
+        console.log(event.data);
+
+        data = event.data.streamId.toString().split('|');
+        _streamId = data[0];
+        _name = data[1];
+        var message = data[2];
+
+        document.getElementById("chathistory").innerHTML += '<br>' + _name + ': ' +message;
+
     }
 }
 
