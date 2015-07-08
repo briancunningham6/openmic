@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OpenMic</title>
     <script src="/js/TB.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
@@ -20,47 +21,48 @@
 </head>
 <body>
     <!-- container -->
-    <div class="container">
-        <header class="codrops-header">
-            <h1>OpenMic <i class="fa fa-bullhorn"></i><span>Connect and ask the audience a question</span></h1>
-        </header>
+    <div class="container-fluid">
+        <div class="row">
+            <header class="codrops-header col-xs-12">
+                <h1>OpenMic <i class="fa fa-bullhorn"></i><span class="col-xs-12">Connect and ask the audience a question</span></h1>
+            </header>
+        </div>
         <!-- Row -->
         <div class="row">
-            <div class="col-sm-12">
-                <div id="opentok_console" class="opentok_console">
-                    <hr>
-                    <div id="textBox">
+                <!-- <div id="opentok_console" class="opentok_console"> -->
+                    <div id="textBox" class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-md-offset-3">
                         <input id="txtName" type="text" class="form-control input-md" placeholder="Enter your Name"/>
                     </div>
-                    <!-- Client Video -->
-                    <center>
-                        <div class="Client_video" id="Client_video" style="display: none">
-                            <div id="myCamera" class="publisherContainer"></div>
-                            <div id="subscribers" class="subscribersContainer" style="display:none"></div>
-                        </div>
-                    <!-- End Client Video -->
-
-                    <br>
-
-                    <!-- Call moderator -->
-                        <div id="onlineusers"></div>
-                    <!-- End Call moderator -->
-
-                    <!-- Connection Buttons -->
-                        <!-- Connect -->
-                        <button id="connectLink" onclick="connect()" type="button" class="btn btn-primary btn-lg">Connect</button>
-                        <!-- Disconnect -->
-                        <button id="disconnectLink" onclick="disconnect()" style="display: none" type="button" class="btn btn-primary btn-lg">Disconnect</button>
-                    </center>
-                    <!-- End Connection Buttons -->
-
+                <!-- </div>End Class opentok_console -->
+        </div><!-- End Row -->
+        <div class="row">
+            <center>
+                <!-- Client Video -->
+                <div class="Client_video" id="Client_video" style="display: none">
+                    <div id="myCamera" class="publisherContainer col-md-12 col-sm-12 col-xs-12"></div>
+                    <div id="subscribers" class="subscribersContainer" style="display:none"></div>
                 </div>
-                <!-- End Class opentok_console -->
-            </div>
+            </center>
+            <!-- End Client Video -->
+        </div><!-- End Row -->
+
+        <div class="row">
+            <center>
+                <!-- Call moderator -->
+                <div id="onlineusers" class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12"></div>
+                <!-- End Call moderator -->
+            </center>
         </div>
-        <!-- End Row -->
-    </div>
-    <!-- End Container -->
+        <div class="row">
+                <!-- Connection Buttons -->
+                <!-- Connect -->
+                <button id="connectLink" onclick="connect()" type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12">Connect</button> 
+                <!-- Disconnect -->
+                <button id="disconnectLink" onclick="disconnect()" style="display: none" type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12">Disconnect</button>
+                <!-- End Connection Buttons -->
+        </div><!-- End Row -->
+        
+    </div><!-- End Container -->
 
     <script type="text/javascript" charset="utf-8">
         show('connectLink');
