@@ -448,7 +448,7 @@ function removeStream(stream)
     //Remove the border around  the background of the video
     var backgroundOfVideo = document.querySelector('.Client_video');
     if(backgroundOfVideo){
-        backgroundOfVideo.style.backgroundColor = '#b4bad2';
+        backgroundOfVideo.style.backgroundColor = 'red';
     }
 
     session.unsubscribe(subscribers[stream.streamId]);
