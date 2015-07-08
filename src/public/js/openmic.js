@@ -93,9 +93,18 @@ function sessionConnectedHandler(event) {
 }
 
 function streamCreatedHandler(event) {
-
-
-    addButton(event.stream);                         //add call button when a new user comes online
+    // THIS IS AN UGLY HACK
+    // If the user is not a moderator then only include a button if it is to be used to connect to the moderator
+    // Check if this user is a moderator: if forceDisconnect is equal to 0 then they are not
+    if(session.capabilities.forceDisconnect === 0){
+        if(event.stream.name.toString() === 'Moderator'){
+            addButton(event.stream);
+        }
+    }
+    else{
+        //They are a moderator... show all buttons
+        addButton(event.stream);                         //add call button when a new user comes online
+    }
 
 }
 
@@ -112,7 +121,7 @@ function addButton( selectedStream) {
         button.setAttribute("value", "Call " + selectedStream.name.toString());
         button.setAttribute("onclick", "beginCall(this)");
         button.setAttribute("style", "display: inline-block");
-        button.setAttribute("class", "btn btn-primary");
+        button.setAttribute("class", "btn btn-primary btn-lg");
         button.innerHTML = "Call" + selectedStream.name.toString();
         buttonContainer.appendChild(document.createElement("br"));
         buttonContainer.appendChild(button);
@@ -122,8 +131,16 @@ function addButton( selectedStream) {
 }
 function removeButton(selectedStream) {
 
-    var btn = document.getElementById("btn_" + selectedStream.streamId)
+    var btn = document.getElementById("btn_" + selectedStream.streamId);
     var buttonContainer = document.getElementById("onlineusers");
+
+
+    if(btn.previousSibling.tagName.toLowerCase() === 'br'){ //Check if there are <br> siblings, then remove them
+        buttonContainer.removeChild(btn.previousSibling);   //This avoids accidentally removing other buttons
+    }
+    if(btn.nextSibling.tagName.toLowerCase() === 'br'){
+        buttonContainer.removeChild(btn.nextSibling);
+    }
     delete _streams[selectedStream.streamId];
     if (btn) {
         buttonContainer.removeChild(btn);
@@ -143,6 +160,7 @@ function endCall(obj, label) {
     console.log(obj.value);
     _stream = _streams[obj.id.replace("btn_", "")];
     obj.value = label;
+    obj.innerHTML = label;
     obj.setAttribute("onclick", "beginCall(this)");
     session.signal({
             type: "endcall",
@@ -167,6 +185,7 @@ function beginCall(obj) {
 
     obj.setAttribute("onclick", "endCall(this,'" + obj.value + "')");
     obj.value = 'End Call';
+    obj.innerHTML = 'End Call';
     _stream = _streams[obj.id.replace("btn_", "")];
 
 

@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome-4.2.0/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="css/menu_topside.css" />
     <link rel="stylesheet" type="text/css" href="style/style.css" />
     <script src="/js/openmic.js"></script>
@@ -23,7 +23,7 @@
     <div class="container">
         <div class="menu-wrap">
             <nav class="menu-top">
-                <div class="profile"><span>Matthew Greenberg</span></div>
+                <div class="profile"><span style="color: #ffffff">Moderator</span></div>
                 <div class="icon-list">
                     <a href="#"><i class="fa fa-fw fa-star-o"></i></a>
                     <a href="#"><i class="fa fa-fw fa-bell-o"></i></a>
@@ -32,13 +32,11 @@
                 </div>
             </nav>
             <nav class="menu-side">
-                <a href="#">Recent Stories</a>
-                <a href="#">Reading List</a>
-                <a href="#">My Stories</a>
-                <a href="#">Categories</a>
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                    Launch QR Code
-                </button>
+                <a href="#" data-toggle="collapse" data-target="#onlineusers">Connected Users</a>
+                <div id="onlineusers" class="collapse">
+                </div>
+                <a href="javascript:disconnect()" id="disconnectLink" style="display: none">Leave</a>
+                <a href="#" data-toggle="modal" data-target="#myModal">Launch QR Code</a>
             </nav>
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -63,24 +61,33 @@
         <button class="menu-button" id="open-button">Open Menu</button>
         <div class="content-wrap">
             <div class="content">
-                <div class="videos">
-                    <div id="myCamera" class="publisherContainer"></div>
-                    <div id="subscribers" class="subscribersContainer"></div>
-                </div>
+                <header class="codrops-header">
+                    <h1>OpenMic <i class="fa fa-bullhorn"></i><span>Welcome Moderator!</span></h1>
+                </header>
 
-                <div id="opentok_console" class="opentok_console">
-                    <div id="links" class="links">
-                        <div class="header">Control Panel</div>
-                        <div id="controlpanel">
-                            <input id="txtName" type="text" />
-                            <input type="button" value="Connect" id="connectLink" onclick="javascript:connect()" />
-                            <input type="button" value="Leave" id="disconnectLink" onclick="javascript:disconnect()" style="display: none" />
-                            <div class="header">Connected Users</div>
-                            <div id="onlineusers">
-                            </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <!-- <div class="videos"> -->
+                                <div id="myCamera" class="publisherContainer"></div>
+                                <hr>
+                                <div id="subscribers" class="subscribersContainer"></div>
+                            <!-- </div> -->
                         </div>
                     </div>
-                    <div id="links" class="links">
+
+
+                <div id="opentok_console" class="opentok_console">
+                    <div id="links">
+                        <div id="controlpanel">
+                            <input id="txtName" type="text" style="display: none"/>
+                            <input type="button" value="Connect" id="connectLink" onclick="javascript:connect()" />
+                            <!-- <input type="button" value="Leave" id="disconnectLink" onclick="javascript:disconnect()" style="display: none" /> -->
+                            <!-- <div class="header">Connected Users</div> -->
+                            <!-- <div id="onlineusers">
+                            </div> -->
+                        </div>
+                    </div>
+                    <div id="links">
                         <div id="controlpanel">
                             <div class="header">Pending Calls</div>
                             <div id="acceptCallBox">

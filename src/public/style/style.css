@@ -5,9 +5,9 @@
    
 }
 
-.videos { float:right; width:361px; }
+/*.videos { float:right; width:361px; }*/
 
-.publisherContainer {
+/*.publisherContainer {
     height:347px;
     width:361px;
     float:left;
@@ -25,10 +25,10 @@
     background-color:#FFFFFF;
     margin-top: 415px;
         
-}
+}*/
 
 #onlineusers {
-    min-height: 200px;
+    min-height: 50px;
 }
 
 .header {
