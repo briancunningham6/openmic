@@ -56,6 +56,8 @@ function disconnect() {
     hide('Client_video');
     show('textBox');
 
+    document.getElementById("chatContainer").innerHTML = '';    //Hacking a way to remove all child element
+
 }
 
 function setupChat(){
