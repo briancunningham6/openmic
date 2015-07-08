@@ -232,7 +232,7 @@ function addButton( selectedStream) {
         button.setAttribute("value", "Call " + selectedStream.name.toString());
         button.setAttribute("onclick", "beginCall(this)");
         button.setAttribute("style", "display: inline-block");
-        button.setAttribute("class", "btn btn-primary btn-lg");
+        button.setAttribute("class", "btn btn-primary btn-lg col-md-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12");
         button.innerHTML = "Call" + selectedStream.name.toString();
         buttonContainer.appendChild(document.createElement("br"));
         buttonContainer.appendChild(button);
