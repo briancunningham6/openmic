@@ -1,10 +1,10 @@
 // Dependencies
 var express = require('express'),
-    OpenTok = require('../server-SDK/lib/opentok');
+    OpenTok = require('opentok');
 
 // Verify that the API Key and API Secret are defined
-var apiKey = 45269832,
-    apiSecret = '967d152358a8d9400980a16f89a181a6fcf5895e';
+var apiKey = 45905142,
+    apiSecret = 'faf049f3b65c70929eff5649a476262f575991f9';
 if (!apiKey || !apiSecret) {
   console.log('You must specify API_KEY and API_SECRET environment variables');
   process.exit(1);

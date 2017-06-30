@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         express: {
             options: {
                 // Override defaults here
-                background: falsegrunt
+                background: false
             },
             dev: {
                 options: {

@@ -11,7 +11,7 @@
   "dependencies": {
     "ejs": "^0.8.6",
     "express": "^3.5.0",
-    "opentok": "^2.3.0"
+    "opentok": "^2.5.1"
   },
   "devDependencies": {
     "grunt-express-server": "^0.5.1"

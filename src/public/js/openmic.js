@@ -24,15 +24,15 @@ var _userName;
 var _chatID = '_' + Math.floor((Math.random() * 2135486430));
 
 function connect() {
-    OT.on("exception", exceptionHandler);
+    TB.on("exception", exceptionHandler);
 
     // Un-comment the following to set automatic logging:
     //OT.setLogLevel(OT.DEBUG);
 
-    if (!(OT.checkSystemRequirements())) {
+    if (!(TB.checkSystemRequirements())) {
         alert("You don't have the minimum requirements to run this application.");
     } else {
-        session = OT.initSession(sessionId);	// Initialize session
+        session = TB.initSession(sessionId);	// Initialize session
         session.connect(apiKey, token);
         // Add event listeners to the session
 
@@ -175,7 +175,7 @@ function startPublishing() {
         publisherDiv.setAttribute('id', 'opentok_publisher');
         parentDiv.appendChild(publisherDiv);
         var publisherProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT, name: name};
-        publisher = OT.initPublisher(apiKey, publisherDiv.id, publisherProps);  // Pass the replacement div id and properties
+        publisher = TB.initPublisher(apiKey, publisherDiv.id, publisherProps);  // Pass the replacement div id and properties
         session.publish(publisher);
         publisher.on("streamCreated", function (event) {  //access the self video
             _selfstream = event.stream;
@@ -532,7 +532,7 @@ function sessionDisconnectedHandler(event) {
     session.off('streamDestroyed', streamDestroyedHandler);
     session.off('connectionCreated', connectionCreatedHandler);
     session.off("signal", signalEventHandler);
-    OT.off("exception", exceptionHandler);
+    TB.off("exception", exceptionHandler);
     session.off('sessionDisconnected', sessionDisconnectedHandler);
     publisher = null;
     removeAllButtons();
@@ -587,7 +587,9 @@ function removeStream(stream)
     session.unsubscribe(subscribers[stream.streamId]);
 }
 function show(id) {
-    document.getElementById(id).style.display = 'inline-block';
+    if(document.getElementById(id).style){
+        document.getElementById(id).style.display = 'inline-block';
+    }
 }
 
 function hide(id) {
